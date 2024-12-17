@@ -19,7 +19,8 @@
         </intent-filter>
     </activity>
         <activity android:name=".CreateUserActivity" />
-
+        <activity android:name=".LoginUserActivity" />
+        <activity android:name=".ViewAvailableTutorsActivity" />
 
     </application>
 </manifest>

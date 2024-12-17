@@ -3,6 +3,7 @@ package com.spotter.tutoring;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -29,7 +30,15 @@ public class MainActivity extends AppCompatActivity {
         // Set click listener for Login User button
         loginUserButton.setOnClickListener(v -> {
             // Perform action for Login User
-            welcomeText.setText("Login User Button Clicked!");
+//            welcomeText.setText("Login User Button Clicked!");
+
+            Log.d("MainActivity", "Button Clicked - login user");
+            try {
+            Intent intent = new Intent(MainActivity.this, LoginUserActivity.class);
+            startActivity(intent);}
+            catch(Exception exc ){
+                Log.d("MainActivity", "issue opening login user activity -- "+exc.getMessage());
+            }
         });
     }
 }
