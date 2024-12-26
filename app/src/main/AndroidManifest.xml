@@ -22,6 +22,8 @@
         <activity android:name=".ui.user.LoginUserActivity" />
         <activity android:name=".ui.tutor.ViewAvailableTutorsActivity" />
         <activity android:name=".ui.booking.BookingActivity" />
+        <activity android:name=".ui.tutor.SearchTutorsActivity" />
+
     </application>
 </manifest>
 
