@@ -1,4 +1,4 @@
-package com.spotter.tutoring;
+package com.spotter.tutoring.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.spotter.tutoring.R;
+import com.spotter.tutoring.model.Tutor;
 
 import java.util.List;
 

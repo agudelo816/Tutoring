@@ -1,4 +1,4 @@
-package com.spotter.tutoring;
+package com.spotter.tutoring.ui.user;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.spotter.tutoring.R;
 import com.spotter.tutoring.api.ApiServiceInterface;
 import com.spotter.tutoring.api.ApiClient;
 import com.spotter.tutoring.api.models.User;

@@ -1,4 +1,4 @@
-package com.spotter.tutoring;
+package com.spotter.tutoring.model;
 
 public class Tutor {
     private String name;

@@ -1,4 +1,4 @@
-package com.spotter.tutoring;
+package com.spotter.tutoring.ui.user;
 
 
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.spotter.tutoring.R;
 
 public class MainActivity extends AppCompatActivity {
 

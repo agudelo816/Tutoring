@@ -11,17 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tutoring">
-    <activity android:name=".MainActivity"
+    <activity android:name=".ui.user.MainActivity"
         android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
-        <activity android:name=".CreateUserActivity" />
-        <activity android:name=".LoginUserActivity" />
-        <activity android:name=".ViewAvailableTutorsActivity" />
-        <activity android:name=".BookingActivity" />
+        <activity android:name=".ui.user.CreateUserActivity" />
+        <activity android:name=".ui.user.LoginUserActivity" />
+        <activity android:name=".ui.tutor.ViewAvailableTutorsActivity" />
+        <activity android:name=".ui.booking.BookingActivity" />
     </application>
 </manifest>
 
