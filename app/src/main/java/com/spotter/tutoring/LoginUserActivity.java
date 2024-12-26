@@ -41,11 +41,17 @@ public class LoginUserActivity extends AppCompatActivity {
 
                     // TODO: Add authentication logic here if needed
 
-                    // Navigate to StudentActivity
-                    Intent intent = new Intent(LoginUserActivity.this, ViewAvailableTutorsActivity.class);
-                    startActivity(intent);
                 }
+
+                startViewAvailableTutorsActivity();
             }
         });
+    }
+
+
+    private void startViewAvailableTutorsActivity(){
+        // Navigate to StudentActivity
+        Intent intent = new Intent(LoginUserActivity.this, ViewAvailableTutorsActivity.class);
+        startActivity(intent);
     }
 }
