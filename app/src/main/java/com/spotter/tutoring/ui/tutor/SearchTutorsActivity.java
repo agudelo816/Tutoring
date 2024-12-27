@@ -1,15 +1,15 @@
 package com.spotter.tutoring.ui.tutor;
 
 import android.os.Bundle;
-import android.os.Parcelable;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.spotter.tutoring.R;
 import com.spotter.tutoring.adapter.TutorAdapter;
 import com.spotter.tutoring.model.Tutor;
 import com.spotter.tutoring.ui.fragments.SearchResultsFragment;
+import com.spotter.tutoring.ui.fragments.SearchBarFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,13 +35,23 @@ public class SearchTutorsActivity extends AppCompatActivity {
         rvTutors.setLayoutManager(new LinearLayoutManager(this));
         rvTutors.setAdapter(tutorAdapter);
 
+        // Initialize the SearchBarFragment
+        SearchBarFragment searchBarFragment = new SearchBarFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, searchBarFragment)
+                .commit();
+    }
 
+    // Method to handle search query entered in SearchBarFragment
+    public void onSearchQueryEntered(String query) {
+        // Pass the query to SearchResultsFragment to update the search results
         SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("tutorList", (ArrayList<? extends Parcelable>) tutorList);
+        bundle.putString("searchQuery", query);
+        bundle.putParcelableArrayList("tutorList", new ArrayList<>(tutorList));  // Pass tutor list to fragment
         searchResultsFragment.setArguments(bundle);
 
-        // Start fragment transaction
+        // Replace or update the fragment
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, searchResultsFragment)
                 .commit();
