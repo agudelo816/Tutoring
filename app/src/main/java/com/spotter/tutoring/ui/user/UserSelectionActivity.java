@@ -11,12 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.spotter.tutoring.R;
 
-public class MainActivity extends AppCompatActivity {
+public class UserSelectionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_user_selection);
 
         // Find the TextView and Buttons by their IDs
         TextView welcomeText = findViewById(R.id.welcomeText);
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set click listener for Create User button
         createUserButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, CreateUserActivity.class);
+            Intent intent = new Intent(UserSelectionActivity.this, CreateUserActivity.class);
             startActivity(intent);
         });
 
@@ -34,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
             // Perform action for Login User
 //            welcomeText.setText("Login User Button Clicked!");
 
-            Log.d("MainActivity", "Button Clicked - login user");
+            Log.d("UserSelectionActivity", "Button Clicked - login user");
             try {
-            Intent intent = new Intent(MainActivity.this, LoginUserActivity.class);
+            Intent intent = new Intent(UserSelectionActivity.this, LoginUserActivity.class);
             startActivity(intent);}
             catch(Exception exc ){
-                Log.d("MainActivity", "issue opening login user activity -- "+exc.getMessage());
+                Log.d("UserSelectionActivity", "issue opening login user activity -- "+exc.getMessage());
             }
         });
     }

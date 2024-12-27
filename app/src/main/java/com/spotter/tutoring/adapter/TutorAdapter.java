@@ -41,7 +41,13 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
 
     @Override
     public int getItemCount() {
-        return tutorList.size();
+        return tutorList != null ? tutorList.size() : 0;
+    }
+
+    // Method to update the list dynamically
+    public void updateList(List<Tutor> newList) {
+        tutorList = newList;
+        notifyDataSetChanged(); // Notify the adapter that the data has changed
     }
 
     public static class TutorViewHolder extends RecyclerView.ViewHolder {
