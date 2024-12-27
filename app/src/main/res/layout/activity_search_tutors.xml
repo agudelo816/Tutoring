@@ -6,7 +6,7 @@
 
     <!-- Search bar fragment container -->
     <FrameLayout
-        android:id="@+id/fragment_container"
+        android:id="@+id/fragment_container_search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

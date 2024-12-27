@@ -1,6 +1,7 @@
 package com.spotter.tutoring.ui.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,33 +29,106 @@ public class SearchResultsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_results, container, false);
 
+        // Debugging: Confirm the layout file is inflated
+        Log.d("SearchResultsFragment", "View inflated successfully");
+
         rvSearchResults = view.findViewById(R.id.rv_search_results);
 
+        // Debugging: Confirm RecyclerView initialization
+        if (rvSearchResults != null) {
+            Log.d("SearchResultsFragment", "RecyclerView found: " + rvSearchResults);
+        } else {
+            Log.e("SearchResultsFragment", "RecyclerView not found!");
+        }
+
         // Retrieve tutor list and query passed from the activity
+        try {
         if (getArguments() != null) {
             tutorList = getArguments().getParcelableArrayList("tutorList");
+            if (tutorList == null) {
+                tutorList = new ArrayList<>(); // Initialize with an empty list
+            }
             String query = getArguments().getString("searchQuery", "");
+            Log.d("SearchResultsFragment", "Tutor list size: " + tutorList.size());
+
+            tutorAdapter = new TutorAdapter(tutorList, tutor -> {
+                // Handle tutor click (e.g., show details or navigate to another activity)
+            });
+
+
+            rvSearchResults.setLayoutManager(new LinearLayoutManager(getContext()));
+            rvSearchResults.setAdapter(tutorAdapter);
+            rvSearchResults.setRecycledViewPool(new RecyclerView.RecycledViewPool());
+
+
             updateSearchResults(query);
         }
 
-        tutorAdapter = new TutorAdapter(tutorList, tutor -> {
-            // Handle tutor click (e.g., show details or navigate to another activity)
-        });
+        } catch (Exception e) {
+            Log.e("Fragment", "Error setting up RecyclerView", e);
+        }
 
-        rvSearchResults.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvSearchResults.setAdapter(tutorAdapter);
+
 
         return view;
     }
 
-    public void updateSearchResults(String query) {
-        List<Tutor> filteredList = new ArrayList<>();
-        for (Tutor tutor : tutorList) {
-            if (tutor.getName().toLowerCase().contains(query.toLowerCase()) ||
-                    tutor.getSubject().toLowerCase().contains(query.toLowerCase())) {
-                filteredList.add(tutor);
-            }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        try {
+            Log.d("SearchResultsFragment", "onViewCreated: Views initialized.");
+        } catch (Exception e) {
+            Log.e("SearchResultsFragment", "Error in onViewCreated", e);
         }
-        tutorAdapter.updateList(filteredList);
     }
+
+    private void updateSearchResults(String query) {
+
+        Log.d("SearchResultsFragment", "tutorList: " + tutorList);
+        Log.d("SearchResultsFragment", "query: " + query);
+        if (tutorList != null) {
+            List<Tutor> filteredList = new ArrayList<>();
+            for (Tutor tutor : tutorList) {
+                if (tutor.getName().toLowerCase().contains(query.toLowerCase())) {
+                    filteredList.add(tutor);
+                }
+            }
+
+            // Make sure the adapter is initialized before calling updateList
+            if (tutorAdapter != null) {
+                tutorAdapter.updateList(filteredList);
+            }
+
+
+//            toggleEmptyState(filteredList.isEmpty());
+
+        }
+
+
+    }
+
+
+    public void updateResults(List<Tutor> filteredList) {
+        if (tutorList != null) {
+            tutorList.clear();  // Clear the existing list
+            tutorList.addAll(filteredList);  // Add the new filtered list
+            tutorAdapter.notifyDataSetChanged();  // Notify the adapter to refresh the RecyclerView
+        }
+    }
+
+    private void toggleEmptyState(boolean show) {
+        View emptyStateView = getView().findViewById(R.id.empty_state_view);
+        if (emptyStateView != null) {
+            emptyStateView.setVisibility(show ? View.VISIBLE : View.GONE);
+        }
+        rvSearchResults.setVisibility(show ? View.GONE : View.VISIBLE);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("SearchResultsFragment", "onDestroyView called");
+    }
+
 }
