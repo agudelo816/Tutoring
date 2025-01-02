@@ -11,19 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.spotter.tutoring.R;
 import com.spotter.tutoring.model.Tutor;
+import com.spotter.tutoring.utils.TutorData;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHolder> {
+public class TutorSearchResultsAdapter extends RecyclerView.Adapter<TutorSearchResultsAdapter.TutorViewHolder> {
 
-    private List<Tutor> tutorList = new ArrayList<>();  // Initialize with an empty list
+    private List<Tutor> visibleTutors;
     private OnTutorClickListener onTutorClickListener;
 
-    public TutorAdapter(List<Tutor> tutorList, OnTutorClickListener onTutorClickListener) {
-        if (tutorList != null) {
-            this.tutorList = tutorList;
-        }
+    public TutorSearchResultsAdapter(List<Tutor> tutors, OnTutorClickListener onTutorClickListener) {
+
+        this.visibleTutors = tutors;
         this.onTutorClickListener = onTutorClickListener;
     }
 
@@ -45,8 +44,8 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
     public void onBindViewHolder(@NonNull TutorViewHolder holder, int position) {
 
         try{
-        if (holder != null && tutorList != null && position < tutorList.size()) {
-            Tutor tutor = tutorList.get(position);
+        if (holder != null && visibleTutors != null && position < visibleTutors.size()) {
+            Tutor tutor = visibleTutors.get(position);
             Log.d("TutorAdapter", "Binding tutor: " + tutor.getName());
             holder.nameTextView.setText(tutor.getName());
             holder.subjectTextView.setText(tutor.getSubject());
@@ -65,20 +64,21 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
 
     @Override
     public int getItemCount() {
-        return tutorList != null ? tutorList.size() : 0;
+        return visibleTutors != null ? visibleTutors.size() : 0;
     }
 
     // Method to update the list dynamically
-    public void updateList(List<Tutor> newList) {
-        if (newList != null) {
-            tutorList.clear();
-            tutorList.addAll(newList);
+    public void updateList(final List<Tutor> tutors) {
+        if (tutors != null) {
+            visibleTutors.clear();
+            visibleTutors.addAll(tutors);
             notifyDataSetChanged();
 
         } else {
             Log.e("TutorAdapter", "New list is null, not updating.");
         }
     }
+
 
     public static class TutorViewHolder extends RecyclerView.ViewHolder {
         private TextView nameTextView, subjectTextView, ratingTextView;

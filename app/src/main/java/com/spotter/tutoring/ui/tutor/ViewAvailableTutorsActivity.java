@@ -1,24 +1,9 @@
 package com.spotter.tutoring.ui.tutor;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.spotter.tutoring.R;
-import com.spotter.tutoring.adapter.TutorAdapter;
-import com.spotter.tutoring.model.Tutor;
-import com.spotter.tutoring.ui.booking.BookingActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ViewAvailableTutorsActivity extends AppCompatActivity {
-
+/*
     private RecyclerView tutorRecyclerView;
     private TutorAdapter tutorAdapter;
     private List<Tutor> tutorList;
@@ -67,4 +52,7 @@ public class ViewAvailableTutorsActivity extends AppCompatActivity {
 //        });
 
     }
+
+
+ */
 }
