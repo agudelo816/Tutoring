@@ -24,51 +24,64 @@ public class SearchResultsFragment extends Fragment {
     private TutorAdapter tutorAdapter;
     private List<Tutor> tutorList;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.fragment_search_results, container, false);
+//
+//        // Debugging: Confirm the layout file is inflated
+//        Log.d("SearchResultsFragment", "View inflated successfully");
+//
+//        rvSearchResults = view.findViewById(R.id.rv_search_results);
+//
+//        // Debugging: Confirm RecyclerView initialization
+//        if (rvSearchResults != null) {
+//            Log.d("SearchResultsFragment", "RecyclerView found: " + rvSearchResults);
+//        } else {
+//            Log.e("SearchResultsFragment", "RecyclerView not found!");
+//        }
+//
+//        // Retrieve tutor list and query passed from the activity
+//        try {
+//        if (getArguments() != null) {
+//            tutorList = getArguments().getParcelableArrayList("tutorList");
+//            if (tutorList == null) {
+//                tutorList = new ArrayList<>(); // Initialize with an empty list
+//            }
+//            String query = getArguments().getString("searchQuery", "");
+//            Log.d("SearchResultsFragment", "Tutor list size: " + tutorList.size());
+//
+//            tutorAdapter = new TutorAdapter(tutorList, tutor -> {
+//                // Handle tutor click (e.g., show details or navigate to another activity)
+//            });
+//
+//
+//            rvSearchResults.setLayoutManager(new LinearLayoutManager(getContext()));
+//            rvSearchResults.setAdapter(tutorAdapter);
+//            rvSearchResults.setRecycledViewPool(new RecyclerView.RecycledViewPool());
+//
+//
+//            updateSearchResults(query);
+//        }
+//
+//        } catch (Exception e) {
+//            Log.e("Fragment", "Error setting up RecyclerView", e);
+//        }
+//
+//
+//
+//        return view;
+
         View view = inflater.inflate(R.layout.fragment_search_results, container, false);
 
-        // Debugging: Confirm the layout file is inflated
-        Log.d("SearchResultsFragment", "View inflated successfully");
-
         rvSearchResults = view.findViewById(R.id.rv_search_results);
+        rvSearchResults.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Debugging: Confirm RecyclerView initialization
-        if (rvSearchResults != null) {
-            Log.d("SearchResultsFragment", "RecyclerView found: " + rvSearchResults);
-        } else {
-            Log.e("SearchResultsFragment", "RecyclerView not found!");
-        }
-
-        // Retrieve tutor list and query passed from the activity
-        try {
-        if (getArguments() != null) {
-            tutorList = getArguments().getParcelableArrayList("tutorList");
-            if (tutorList == null) {
-                tutorList = new ArrayList<>(); // Initialize with an empty list
-            }
-            String query = getArguments().getString("searchQuery", "");
-            Log.d("SearchResultsFragment", "Tutor list size: " + tutorList.size());
-
-            tutorAdapter = new TutorAdapter(tutorList, tutor -> {
-                // Handle tutor click (e.g., show details or navigate to another activity)
-            });
-
-
-            rvSearchResults.setLayoutManager(new LinearLayoutManager(getContext()));
-            rvSearchResults.setAdapter(tutorAdapter);
-            rvSearchResults.setRecycledViewPool(new RecyclerView.RecycledViewPool());
-
-
-            updateSearchResults(query);
-        }
-
-        } catch (Exception e) {
-            Log.e("Fragment", "Error setting up RecyclerView", e);
-        }
-
-
+        tutorAdapter = new TutorAdapter(tutorList, tutor -> {
+            // Handle tutor click (e.g., show details or navigate to another activity)
+        });
+        rvSearchResults.setAdapter(tutorAdapter);
 
         return view;
     }
@@ -83,31 +96,41 @@ public class SearchResultsFragment extends Fragment {
         }
     }
 
-    private void updateSearchResults(String query) {
+//    private void updateSearchResults(String query) {
+//
+//        Log.d("SearchResultsFragment", "tutorList: " + tutorList);
+//        Log.d("SearchResultsFragment", "query: " + query);
+//        if (tutorList != null) {
+//            List<Tutor> filteredList = new ArrayList<>();
+//            for (Tutor tutor : tutorList) {
+//                if (tutor.getName().toLowerCase().contains(query.toLowerCase())) {
+//                    filteredList.add(tutor);
+//                }
+//            }
+//
+//            // Make sure the adapter is initialized before calling updateList
+//            if (tutorAdapter != null) {
+//                tutorAdapter.updateList(filteredList);
+//            }
+//
+//
+////            toggleEmptyState(filteredList.isEmpty());
+//
+//        }
+//
+//
+//    }
 
-        Log.d("SearchResultsFragment", "tutorList: " + tutorList);
-        Log.d("SearchResultsFragment", "query: " + query);
-        if (tutorList != null) {
-            List<Tutor> filteredList = new ArrayList<>();
-            for (Tutor tutor : tutorList) {
-                if (tutor.getName().toLowerCase().contains(query.toLowerCase())) {
-                    filteredList.add(tutor);
-                }
-            }
-
-            // Make sure the adapter is initialized before calling updateList
-            if (tutorAdapter != null) {
-                tutorAdapter.updateList(filteredList);
-            }
 
 
-//            toggleEmptyState(filteredList.isEmpty());
+    // Method to update search results based on query
+    public void updateSearchResults(String query) {
+        // Filter the tutor list based on the query
+        List<Tutor> filteredList = filterTutors(query);
 
-        }
-
-
+        // Update the adapter with the filtered list
+        tutorAdapter.updateList(filteredList);
     }
-
 
     public void updateResults(List<Tutor> filteredList) {
         if (tutorList != null) {
@@ -131,4 +154,19 @@ public class SearchResultsFragment extends Fragment {
         Log.d("SearchResultsFragment", "onDestroyView called");
     }
 
+
+    private List<Tutor> filterTutors(String query) {
+        List<Tutor> filteredList = new ArrayList<>();
+        // Sample tutor data, replace with actual data source
+        tutorList.add(new Tutor("Abc Def", "Math", 4.5, "abc@email.com"));
+        tutorList.add(new Tutor("John Doe", "Math", 4.5));
+
+        for (Tutor tutor : tutorList) {
+            if (tutor.getName().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(tutor);
+            }
+        }
+
+        return filteredList;
+    }
 }

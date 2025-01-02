@@ -24,67 +24,78 @@ public class SearchTutorsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_search_tutors);
+//
+//        rvTutors = findViewById(R.id.rv_search_results);
+//        tutorList = new ArrayList<>();
+//        loadDummyData();
+//
+//        tutorAdapter = new TutorAdapter(tutorList, tutor -> {
+//            // Handle tutor click (e.g., show details or navigate to another activity)
+//        });
+//        rvTutors.setLayoutManager(new LinearLayoutManager(this));
+//        rvTutors.setAdapter(tutorAdapter);
+//
+//        // Initialize the SearchBarFragment
+//        SearchBarFragment searchBarFragment = new SearchBarFragment();
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.fragment_container_search_bar, searchBarFragment)
+//                .commit();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_tutors);
-
-        rvTutors = findViewById(R.id.rv_search_results);
-        tutorList = new ArrayList<>();
-        loadDummyData();
-
-        tutorAdapter = new TutorAdapter(tutorList, tutor -> {
-            // Handle tutor click (e.g., show details or navigate to another activity)
-        });
-        rvTutors.setLayoutManager(new LinearLayoutManager(this));
-        rvTutors.setAdapter(tutorAdapter);
 
         // Initialize the SearchBarFragment
         SearchBarFragment searchBarFragment = new SearchBarFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container_search_bar, searchBarFragment)
                 .commit();
+
+        // Initialize the SearchResultsFragment (empty at first)
+        SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container_search_results, searchResultsFragment)
+                .commit();
     }
 
     // Method to handle search query entered in SearchBarFragment
     public void onSearchQueryEntered(String query) {
-//        Log.d("SearchTutorsActivity", "onSearchQueryEntered");
-//        // Pass the query to SearchResultsFragment to update the search results
-//        SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putString("searchQuery", query);
-//        bundle.putParcelableArrayList("tutorList", new ArrayList<>(tutorList));  // Pass tutor list to fragment
-//        searchResultsFragment.setArguments(bundle);
 //
-//        // Replace or update the fragments
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.rv_search_results, searchResultsFragment)
-//                .commit();
-        Log.d("SearchTutorsActivity", "onSearchQueryEntered");
+//        Log.d("SearchTutorsActivity", "onSearchQueryEntered");
+//
+//        // Filter the tutor list based on the search query
+//        List<Tutor> filteredList = filterTutors(query);
+//
+//        // Update the adapter with the filtered list
+//        tutorAdapter.updateList(filteredList); // Assuming updateList is a method in your adapter
+//
+//        // Optionally, you can also update the SearchResultsFragment if you want to show results in a different fragment
+//        SearchResultsFragment searchResultsFragment = (SearchResultsFragment) getSupportFragmentManager()
+//                .findFragmentByTag("SEARCH_RESULTS_FRAGMENT");
+//
+//        if (searchResultsFragment != null) {
+//            // If the fragment already exists, update its data
+//            searchResultsFragment.updateResults(filteredList);
+//        } else {
+//            // If the fragment doesn't exist, create a new one and pass the filtered data
+//            searchResultsFragment = new SearchResultsFragment();
+//            Bundle bundle = new Bundle();
+//            bundle.putString("searchQuery", query);
+//            bundle.putParcelableArrayList("tutorList", new ArrayList<>(filteredList));
+//            searchResultsFragment.setArguments(bundle);
+//
+//            // Replace or add the fragment to the fragment container
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.fragment_container_search_bar, searchResultsFragment, "SEARCH_RESULTS_FRAGMENT")
+//                    .commit();
+//        }
 
-        // Filter the tutor list based on the search query
-        List<Tutor> filteredList = filterTutors(query);
-
-        // Update the adapter with the filtered list
-        tutorAdapter.updateList(filteredList); // Assuming updateList is a method in your adapter
-
-        // Optionally, you can also update the SearchResultsFragment if you want to show results in a different fragment
         SearchResultsFragment searchResultsFragment = (SearchResultsFragment) getSupportFragmentManager()
-                .findFragmentByTag("SEARCH_RESULTS_FRAGMENT");
+                .findFragmentById(R.id.fragment_container_search_results);
 
         if (searchResultsFragment != null) {
-            // If the fragment already exists, update its data
-            searchResultsFragment.updateResults(filteredList);
-        } else {
-            // If the fragment doesn't exist, create a new one and pass the filtered data
-            searchResultsFragment = new SearchResultsFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("searchQuery", query);
-            bundle.putParcelableArrayList("tutorList", new ArrayList<>(filteredList));
-            searchResultsFragment.setArguments(bundle);
-
-            // Replace or add the fragment to the fragment container
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container_search_bar, searchResultsFragment, "SEARCH_RESULTS_FRAGMENT")
-                    .commit();
+            searchResultsFragment.updateSearchResults(query);  // Pass the query to update results
         }
 
         }
