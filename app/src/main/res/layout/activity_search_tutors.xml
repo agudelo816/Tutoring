@@ -1,42 +1,25 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/et_search_query"
+    <!-- Search bar fragment container -->
+    <FrameLayout
+        android:id="@+id/fragment_container_search_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Search tutors"
-        android:inputType="text" />
+        android:layout_height="wrap_content" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_filter_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_sort_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
-
-
+    <!-- RecyclerView for displaying the list of tutors -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_results"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:layout_weight="1" />
 
-    <!-- Add this fragment container -->
     <FrameLayout
-        android:id="@+id/fragment_container"
+        android:id="@+id/fragment_container_search_results"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

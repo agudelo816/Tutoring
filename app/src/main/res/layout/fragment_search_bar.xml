@@ -1,39 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:padding="16dp">
 
-    <!-- Search Input Field -->
     <EditText
         android:id="@+id/et_search_query"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:hint="Search tutors"
         android:inputType="text"
-        android:padding="12dp"
+        android:imeOptions="actionSearch"
+        android:singleLine="true"
         />
 
-    <!-- RecyclerView for Filter Tabs -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_filter_tabs"
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/btn_search"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
+        android:src="@android:drawable/ic_search_category_default"
+        android:contentDescription="Search"
+        android:layout_gravity="center_vertical"
+        android:background="?android:attr/selectableItemBackgroundBorderless" />
 
-    <!-- RecyclerView for Sort Tabs -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_sort_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
-
-    <!-- RecyclerView for Search Results (Tutors) -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_search_results"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
 </LinearLayout>
