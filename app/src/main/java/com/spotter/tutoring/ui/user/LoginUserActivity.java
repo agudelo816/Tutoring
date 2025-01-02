@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.spotter.tutoring.R;
 import com.spotter.tutoring.ui.tutor.SearchTutorsActivity;
-import com.spotter.tutoring.ui.tutor.ViewAvailableTutorsActivity;
 
 public class LoginUserActivity extends AppCompatActivity {
 
@@ -53,7 +52,7 @@ public class LoginUserActivity extends AppCompatActivity {
     }
 
 
-    private void startViewAvailableTutorsActivity(){
+    private void startViewAvailableTutorsActivity() {
         // Navigate to StudentActivity
 //        Intent intent = new Intent(LoginUserActivity.this, ViewAvailableTutorsActivity.class);
 

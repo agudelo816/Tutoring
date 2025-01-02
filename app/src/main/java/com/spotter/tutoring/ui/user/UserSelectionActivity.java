@@ -32,14 +32,12 @@ public class UserSelectionActivity extends AppCompatActivity {
         // Set click listener for Login User button
         loginUserButton.setOnClickListener(v -> {
             // Perform action for Login User
-//            welcomeText.setText("Login User Button Clicked!");
-
             Log.d("UserSelectionActivity", "Button Clicked - login user");
             try {
-            Intent intent = new Intent(UserSelectionActivity.this, LoginUserActivity.class);
-            startActivity(intent);}
-            catch(Exception exc ){
-                Log.d("UserSelectionActivity", "issue opening login user activity -- "+exc.getMessage());
+                Intent intent = new Intent(UserSelectionActivity.this, LoginUserActivity.class);
+                startActivity(intent);
+            } catch (Exception exc) {
+                Log.d("UserSelectionActivity", "issue opening login user activity -- " + exc.getMessage());
             }
         });
     }
