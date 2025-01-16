@@ -5,4 +5,6 @@
         <item>Student</item>
         <item>Tutor</item>
     </string-array>
+    <string name="tutor_profile_picture">Profile picture of the tutor</string>
+
 </resources>

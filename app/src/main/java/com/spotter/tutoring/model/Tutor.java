@@ -1,19 +1,31 @@
 package com.spotter.tutoring.model;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Tutor implements Parcelable {
+import java.io.Serializable;
+
+public class Tutor implements Parcelable, Serializable {
     private String name;
     private String subject;
     private double rating;
 
     private String email;
 
+    private String profilePictureUrl;
+
     public Tutor(String name, String subject, double rating) {
         this.name = name;
         this.subject = subject;
         this.rating = rating;
         this.email = "generic@email.com";
+    }
+
+    public Tutor(String name, double rating, String subject, String profilePictureUrl) {
+        this.name = name;
+        this.rating = rating;
+        this.subject = subject;
+        this.profilePictureUrl = profilePictureUrl;
     }
 
     public Tutor(String name, String subject, double rating, String email) {
@@ -68,5 +80,9 @@ public class Tutor implements Parcelable {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
     }
 }

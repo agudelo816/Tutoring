@@ -16,13 +16,19 @@ import com.spotter.tutoring.model.Tutor;
 
 public class TutorItemFragment extends Fragment {
 
-    private TextView tvTutorName, tvTutorRating;
-    private ImageView ivTutorProfilePicture;
+//    private TextView tvTutorName, tvTutorRating;
+//    private ImageView ivTutorProfilePicture;
+
+    private static final String ARG_TUTOR = "tutor";
 
     private Tutor tutor;
 
-    public TutorItemFragment(Tutor tutor) {
-        this.tutor = tutor;
+    public static TutorItemFragment newInstance(Tutor tutor) {
+        TutorItemFragment fragment = new TutorItemFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_TUTOR, tutor);
+        fragment.setArguments(args);
+        return fragment;
     }
 
 
@@ -30,12 +36,17 @@ public class TutorItemFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tutor_item, container, false);
-        tvTutorName = view.findViewById(R.id.tv_tutor_name);
-        tvTutorRating = view.findViewById(R.id.tv_tutor_rating);
-        ivTutorProfilePicture = view.findViewById(R.id.iv_tutor_profile_picture);
 
-        tvTutorName.setText(tutor.getName());
-        tvTutorRating.setText(String.valueOf(tutor.getRating()));
+
+        TextView tvTutorName = view.findViewById(R.id.tv_tutor_name);
+        TextView tvTutorRating = view.findViewById(R.id.tv_tutor_rating);
+        ImageView ivTutorProfilePicture = view.findViewById(R.id.iv_tutor_profile_picture);
+
+        if (tutor != null) {
+            tvTutorName.setText(tutor.getName());
+            tvTutorRating.setText(String.valueOf(tutor.getRating()));
+        }
+
 
         return view;
     }

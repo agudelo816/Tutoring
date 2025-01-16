@@ -1,6 +1,7 @@
 package com.spotter.tutoring.ui.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.spotter.tutoring.R;
 import com.spotter.tutoring.adapter.TutorSearchResultsAdapter;
+import com.spotter.tutoring.model.Tutor;
 import com.spotter.tutoring.utils.TutorData;
+import com.spotter.tutoring.utils.TutorSearchResultsUtil;
+
+import java.util.List;
 
 public class SearchResultsFragment extends Fragment {
 
     private RecyclerView rvSearchResults;
+    private TutorSearchResultsAdapter tutorAdapter;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflate, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -26,12 +33,30 @@ public class SearchResultsFragment extends Fragment {
         rvSearchResults = view.findViewById(R.id.rv_search_results);
         rvSearchResults.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        TutorSearchResultsAdapter adapter = new TutorSearchResultsAdapter(TutorData.getTutors());
-        rvSearchResults.setAdapter(adapter);
+        tutorAdapter = new TutorSearchResultsAdapter(TutorData.getTutors(), tutor -> {
+
+        });
+        rvSearchResults.setAdapter(tutorAdapter);
 
         return view;
     }
 
+    // Method to
+    // update search results based on query
+    public void updateSearchResults(String query) {
+        // Filter the tutor list based on the query
+        final List<Tutor> filteredList = TutorSearchResultsUtil.filterTutors(TutorData.getTutors(), query);
+
+        // Update the adapter with the filtered list
+        tutorAdapter.updateList(filteredList);
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("SearchResultsFragment", "onDestroyView called");
+    }
 
 
 /*
